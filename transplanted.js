@@ -1,7 +1,7 @@
 let poem =
 `From that landscape I am now missing.`
 
-let lines, markov, txt1, txt2, x = 160, y = 240;
+let lines, markov, txt1, txt2, x = 40, y = 40;
 
 let myFont, fontDone;
 
