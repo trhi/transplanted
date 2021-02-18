@@ -1,7 +1,9 @@
 let poem =
 `From that landscape I am now missing.`
 
-let lines, markov, txt1, txt2, x = 40, y = 40;
+let cnv, lines, markov, txt1, txt2, x = 40, y = 40;
+let transplanted, rooted, growing, rhizome;
+let poetryLoop, toggleAudio, audioStatus;
 
 let myFont, fontDone;
 
@@ -11,49 +13,91 @@ function fontLoaded(){
 
 function preload(){
 
+  soundFormats(`mp3`);
+  poetryLoop = loadSound(`assets/sound/transplanted.mp3`);
+
+  //poetryLoop = createAudio('assets/sound/transplanted.mp3');
+  //poetryLoop.autoplay();
+  poetryLoop.setVolume(0.1);
+
   myFont = loadFont("assets/fonts/PoppinsLatin-Medium.otf", fontLoaded);
 
-  txt1 = loadStrings('txt/transplanted.txt');
-  txt2 = loadStrings('txt/rooted.txt');
+  //txt1 = loadStrings('txt/transplanted.txt');
+  //txt2 = loadStrings('txt/rooted.txt');
+
+  transplanted = loadStrings('txt/transplanted.txt');
+  rooted = loadStrings('txt/rooted.txt');
+  growing = loadStrings('txt/growing.txt');
+  rhizome = loadStrings('txt/rhizome.txt');
+
 
 }
 
 function setup(){
 
+  if(poetryLoop.isLoaded()){
+    poetryLoop.play();
+    poetryLoop.setLoop(true);
+    poetryLoop.pause();
+  }
+
+  cnv = createCanvas(500, 200);
+  cnv.style(`z-index`,`0`);
+
+  toggleAudio = createButton(`&#128264`);
+  toggleAudio.id(`toggleAudio`);
+  $(`#toggleAudio`).css(`font-size`,`25px`);
+  $(`#toggleAudio`).css(`text-align`,`center`);
+  $(`#toggleAudio`).css(`border`,`none`);
+  $(`#toggleAudio`).css(`background`,`rgb(23, 230, 200)`);
+  $(`#toggleAudio`).css(`z-index`,`1000`);
+  $(`#toggleAudio`).css(`left`,`30px`);
+  $(`#toggleAudio`).css(`top`,`130px`);
+  $(`#toggleAudio`).css(`width`,`45px`);
+  $(`#toggleAudio`).css(`height`,`45px`);
+  $(`#toggleAudio`).css(`border-radius`,`50px`);
+  $(`#toggleAudio`).css(`position`,`fixed`);
+  $(`#toggleAudio`).css(`cursor`,`pointer`);
+
+
+  toggleAudio.mousePressed(muteUnmute);
+
   if(fontDone){
       textFont(myFont);
   }
 
-
-let txt = `This is a two sentence example.
-This is the second one.
-Here is a further sentence.
-And another one.
-These are all the examples. `
-
-let rm = RiTa.markov(2);
-rm.addText(txt);
-let sentences = rm.generate(5);
-
-for (i = 0; i < sentences.length; i ++ ){
-console.log(sentences[i]);
-}
-
-    createCanvas(500, 200);
-    textFont('helvetica', 16);
+    textSize(16);
     textLeading(25);
     textAlign(CENTER);
 
     lines = ["click to (re)generate"];
 
-    // create a markov model w' n=4
-    markov = RiTa.markov(3);
+    markov = RiTa.markov(2, true);
 
     // load text into the model
-    markov.addText(txt1.join(' '));
-    markov.addText(txt2.join(' '));
+    markov.addText(transplanted.join(' '));
+    markov.addText(rooted.join(' '));
+    //markov.addText(growing.join(' '));
+    //markov.addText(rhizome.join(' '));
+
+    //console.log(markov);
 
     drawText();
+}
+
+function muteUnmute(){
+
+  console.log("entered function and poetryLoop.paused is: " + poetryLoop.isPaused());
+
+  if ( poetryLoop.isPlaying() ) {
+    poetryLoop.pause();
+    toggleAudio.html(`&#128264`); // audio on
+
+  } else {
+    poetryLoop.play();
+    toggleAudio.html(`&#128263`); // audio off
+  }
+
 }
 
 function drawText() {
@@ -63,7 +107,7 @@ function drawText() {
 }
 
 function mouseClicked() {
-  lines = markov.generate(2);
+  lines = markov.generate(1);
   x = y = 40;
   drawText();
 }
