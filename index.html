@@ -11,12 +11,23 @@
 
 <script src="https://unpkg.com/rita"></script>
 
-<script language="javascript" type="text/javascript" src="transplanted.js"></script>
+<!--<script language="javascript" type="text/javascript" src="transplanted.js"></script>-->
+<script language="javascript" type="text/javascript" src="transplanted-2.js"></script>
+<script language="javascript" type="text/javascript" src="interface.js"></script>
+<link rel="stylesheet" href="assets/css/transplanted.css">
+
 <!--<script language="javascript" type="text/javascript" src="interface.js"></script>-->
 
 </head>
 <body>
-  <div id="transplanted-div" class='transplanted'><p id='transplanted-text'></p></div>
+
+  <!--<div id=introDIV><p style="text-align: center" onClick=' this.style.visibility = "hidden"'> paina sydäntäni, <br> pohjaan <br> ja puhu minulle. <br>kysy minulta kysymyksiä</p></div>-->
+  <div id='container' style="visibility: visible">
+    <div id='heartDIV' style="visibility: visible"></div>
+    <div id='questions' class='transplanted-text'></div>
+  </div>
+  <div id='answers' class='transplanted-text'></div>
+  <div id='transplanted-div' class='transplanted'><p id='transplanted-text'></p></div>
 <script>
   $("#transplanted-div").hide();
 </script>

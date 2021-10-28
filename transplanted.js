@@ -5,7 +5,7 @@ let poem =
 
 let cnv, lines, linesString, howMany, markov, txt1, txt2, x = 40, y = 40;
 var linesGenerated = ["click   »   to (re)generate"];
-let transplanted, rooted, growing, rhizome;
+let transplanted, rooted, growing, rhizome, miksi, vieraslaji;
 let poetryLoop, toggleAudio, audioStatus;
 let backward, forward, counter = 0, showing = 0;
 
@@ -19,10 +19,6 @@ function preload(){
 
   soundFormats(`mp3`);
   poetryLoop = loadSound(`assets/sound/transplanted.mp3`);
-  //HTML5 audio element would have: controls autoplay muted
-
-  //poetryLoop = createAudio('assets/sound/transplanted.mp3');
-  //poetryLoop.autoplay();
   poetryLoop.setVolume(0.1);
 
   myFont = loadFont("assets/fonts/PoppinsLatin-Medium.otf", fontLoaded);
@@ -30,10 +26,12 @@ function preload(){
   //txt1 = loadStrings('txt/transplanted.txt');
   //txt2 = loadStrings('txt/rooted.txt');
 
-  transplanted = loadStrings('txt/transplanted.txt');
-  rooted = loadStrings('txt/rooted.txt');
-  growing = loadStrings('txt/growing.txt');
-  rhizome = loadStrings('txt/rhizome.txt');
+  transplanted = loadStrings('txt/en/transplanted.txt');
+  rooted = loadStrings('txt/en/rooted.txt');
+  growing = loadStrings('txt/en/growing.txt');
+  rhizome = loadStrings('txt/en/rhizome.txt');
+  miksi = loadStrings('txt/fi/miksi-olen-taalla.txt');
+  vieraslaji = loadStrings('txt/fi/vieraslaji.txt');
 
 
 }
@@ -41,11 +39,7 @@ function preload(){
 function setup(){
 
   if(poetryLoop.isLoaded()){
-    //every time you call play() it will start playing the same
-    //audio again.
-    //poetryLoop.play();
-    poetryLoop.setLoop(true);
-    //poetryLoop.pause();
+    poetryLoop.setLoop(true); //dont' play(), because it will always start playing a new instance of this audio
   }
 
   cnv = createCanvas(500, 200);
@@ -54,61 +48,26 @@ function setup(){
 
   toggleAudio = createButton(`&#128264`);
   toggleAudio.id(`toggleAudio`);
-  $(`#toggleAudio`).css(`font-size`,`25px`);
-  $(`#toggleAudio`).css(`text-align`,`center`);
-  $(`#toggleAudio`).css(`border`,`none`);
-  $(`#toggleAudio`).css(`background`,`rgb(23, 230, 200)`);
-  $(`#toggleAudio`).css(`z-index`,`1000`);
-  $(`#toggleAudio`).css(`left`,`230px`);
-  $(`#toggleAudio`).css(`top`,`130px`);
-  $(`#toggleAudio`).css(`width`,`45px`);
-  $(`#toggleAudio`).css(`height`,`45px`);
-  $(`#toggleAudio`).css(`border-radius`,`50px`);
-  $(`#toggleAudio`).css(`position`,`fixed`);
-  $(`#toggleAudio`).css(`cursor`,`pointer`);
+  toggleAudio.class('button');
   toggleAudio.mousePressed(muteUnmute);
 
   backward = createButton(`&#x00AB`);
-  backward.style(`left`,`30px`);
+  backward.id(`backward`);
+  backward.class('button');
   backward.attribute(`disabled`, `true`);
-
-  backward.style(`cursor`,`pointer`);
-  backward.style(`top`,`130px`);
-  backward.style(`font-size`,`25px`);
-  backward.style(`text-align`,`center`);
-  backward.style(`border`,`none`);
-  backward.style(`background`,`rgb(23, 230, 200)`);
-  backward.style(`z-index`,`1000`);
-  backward.style(`width`,`45px`);
-  backward.style(`height`,`45px`);
-  backward.style(`border-radius`,`50px`);
-  backward.style(`position`,`fixed`);
   backward.mousePressed(drawOlderText);
 
   forward = createButton(`&#x00BB`);
+  forward.class('button');
+  forward.id('forward');
   forward.style(`left`, (cnv.size().width - 60).toString().concat(`px`) );
   forward.mousePressed(generateNext);
 
-  forward.style(`top`,`130px`);
-  forward.style(`cursor`,`pointer`);
-  forward.style(`font-size`,`25px`);
-  forward.style(`text-align`,`center`);
-  forward.style(`border`,`none`);
-  forward.style(`background`,`rgb(23, 230, 200)`);
-  forward.style(`z-index`,`1000`);
-  forward.style(`z-index`,`1000`);
-  forward.style(`width`,`45px`);
-  forward.style(`height`,`45px`);
-  forward.style(`border-radius`,`50px`);
-  forward.style(`position`,`fixed`);
+  //console.log("Width of canvas minus 30: " );
+  //console.log( (cnv.size().width - 30) );
 
-
-  console.log("Width of canvas minus 30: " );
-  console.log( (cnv.size().width - 30) );
-
-  console.log("Width of canvas minus 30 as string: " );
-  console.log( (cnv.size().width - 30).toString() );
-
+  //console.log("Width of canvas minus 30 as string: " );
+  //console.log( (cnv.size().width - 30).toString() );
 
   if(fontDone){
       textFont(myFont);
@@ -118,15 +77,22 @@ function setup(){
     textLeading(25);
     textAlign(CENTER);
 
-    //lines = ["click   »   to (re)generate"];
-
+    //markov = RiTa.markov(2, true);
     markov = RiTa.markov(2, true);
+    //this means: look for sequences of two words that follow eachother.
+    //in other words, the model is not going to ever use certain words, unless they are followed or preceded by another word.
+
 
     // load text into the model
+    markov.addText(miksi.join(' '));
+    markov.addText(vieraslaji.join(' '));
+
+    /*
     markov.addText(transplanted.join(' '));
     markov.addText(rooted.join(' '));
-    //markov.addText(growing.join(' '));
-    //markov.addText(rhizome.join(' '));
+    markov.addText(growing.join(' '));
+    markov.addText(rhizome.join(' '));
+    */
 
     //console.log(markov);
 
@@ -175,7 +141,15 @@ function drawText(index) {
 
 function generateNext() {
   if(showing == counter){
-      lines = markov.generate(1); //markov returns an OBJECT!!!
+    //markov.generate({maxLengthMatch:3});
+    //options.maxLength:
+    //markov.generate({temperature:50});
+    //markov.generate({startTokens:"kaipaan"});
+    //markov.generate({maxLength:5});
+    //markov.generate({seed:"kaipaan"});
+
+      lines = markov.generate(1, {maxLength:6}); //markov returns an OBJECT!!!
+      //this is the correct syntax for including options^^
 
       //console.log("Markov returned:" + lines[0]);
       //console.log("Markov returned:" + lines);

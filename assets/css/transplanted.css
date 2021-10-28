@@ -1,0 +1,107 @@
+@font-face {
+  font-family: "Poppins";
+  src: url("../fonts/PoppinsLatin-Medium.otf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+body{
+  overflow: hidden;
+}
+
+.infobutton{
+  font-family: "Poppins", Helvetica, Arial, sans-serif;
+  font-size: 18px;
+  text-align: center;
+  z-index: 1000;
+  top: 40px;
+  left: 40px;
+  width: 45px;
+  height: 45px;
+  border-radius: 50px;
+  position: fixed;
+  cursor: pointer;
+  border: 2px solid #000;
+  border-color: black;
+  background: white;
+
+}
+
+.transplanted-text{
+
+}
+
+#container{
+  position: relative;
+  width: window.innerWidth;
+  height: window.innerHeight;
+}
+
+#questions{
+  position: absolute;
+  width: 100px;
+  left: 80px;
+  top: 60px;
+  font-family: "Poppins", Helvetica, Arial, sans-serif;
+  text-align: center;
+  font-size: 40px;
+  z-index: 10;
+}
+
+#heartDIV{
+  width: 100%;
+  height: 100%;
+  left: 60px;
+  top: 60px;
+  position:absolute;
+}
+
+.h-ear-tButton {
+  border: none;
+  cursor: pointer;
+}
+
+.heartButton {
+  font-size: 30vw;
+  text-align: center;
+  border: none;
+  top: 0px;
+  left: 25%;
+  border-radius: 50px;
+  cursor: pointer;
+  background: white;
+}
+
+.heartButton:hover {
+  background-image: 'assets/images/heart.jpg';
+}
+
+.heartButton:active {
+  background-image: 'assets/images/heart-beating.gif';
+}
+
+
+.heartButton {
+  position:absolute;
+  font-size: 50vw;
+  text-align: center;
+  border: none;
+  top: 10%;
+  left: 25%;
+  border-radius: 50px;
+  cursor: pointer;
+  background: white;
+  z-index: 1000;
+}
+
+#toggleAudio {
+  left: 230px;
+}
+
+#backward {
+  left: 30px;
+}
+
+#backward {
+
+}
