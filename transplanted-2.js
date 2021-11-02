@@ -1,7 +1,11 @@
   let a = "💔";
-  var listener, canvas, heartButton, speakingToMyHeart, infoButton;
+  var listener, canvas, heartButton, speakingToMyHeart, infoButton, url, language, thoughts;
 
 function preload() {
+
+  // Nothing besides load calls (loadImage, loadJSON, loadFont, loadStrings, etc.) should be inside the preload function
+
+  language = 'fi'; //or set this using a button when you support more languages
 
   var isSpeechRecognitionSupported = false;
   try {
@@ -35,12 +39,19 @@ function preload() {
       console.log(speakingToMyHeart);
       $("#questions").html('" <em>' + speakingToMyHeart + '<em>? "');
       //console.log(" *** *** " + speechToText);
-      //detectSelection(speechToText);
+      if(event.results[0].isFinal){
+        whatDidTheyAskUs(speakingToMyHeart);
+      }
       //speakFromMyHeart(speakingToMyHeart);
       //once the user has once pressed continuously, change the instructions behind this button:
       //$('#speak').tooltipster('content', 'then observe what happens').tooltipster('show');
     }
   }
+
+  url = 'assets/audio/' + language + '/' + 'thoughts.json';
+  thoughts = loadJSON(url);
+  //$.get(url, (e) => console.log(e));
+
 }
 
 function setup(){

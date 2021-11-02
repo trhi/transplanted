@@ -1,3 +1,6 @@
+var mitae = [], miksi = [], miten = [];
+var counter = 0;
+
 function doInterface(){
 
   canvas = createCanvas(windowWidth, windowWidth);
@@ -7,6 +10,8 @@ function doInterface(){
 
   infoButton = createButton('i');
   infoButton.addClass('infobutton');
+
+  sortAudiofiles();
 
 
   //let heart = createButton(a);
@@ -47,6 +52,106 @@ function listenToMyHeart() {
   listener.start();
 
 }
+
+function  sortAudiofiles() {
+  for( let i=0; i<thoughts.questions.length; i++){
+    if( thoughts.questions[i].text.includes('miksi') ){
+      miksi.push(thoughts.questions[i]);
+    }
+  }
+  for( let i=0; i<thoughts.questions.length; i++){
+    if( thoughts.questions[i].text.includes('mitä') ){
+      mitae.push(thoughts.questions[i]);
+    }
+  }
+  for( let i=0; i<thoughts.questions.length; i++){
+    if( thoughts.questions[i].text.includes('miten') ){
+      miten.push(thoughts.questions[i]);
+    }
+  }
+
+  console.log("Found these:");
+  console.log(miksi, mitae, miten);
+}
+
+//or a separate function to sort questions/interjections/answers according to words?
+
+function whatDidTheyAskUs(whatTheyAskedUs){
+  if ( whatTheyAskedUs.includes('miksi') || whatTheyAskedUs.includes('Miksi') ){
+    console.log("I heard miksi");
+    //if they asked miski, then let's echo that question back to them:
+
+    let randomAudio = random(miksi).filename;
+    let path = 'assets/audio/fi/' + randomAudio;
+    let audio = createAudio( path );
+    audio.addCue(2, next);
+    audio.play();
+    //audio.play();
+  //  audio.onended(continue);
+  }
+  if ( whatTheyAskedUs.includes('mitä') || whatTheyAskedUs.includes('Mitä')){
+    console.log("I heard mitä");
+    let randomAudio = random(mitae).filename;
+    let path = 'assets/audio/fi/' + randomAudio;
+    let audio = createAudio( path );
+    audio.addCue(2, next);
+    audio.play();
+    //audio.play();
+  //  audio.onended(continue);
+
+  }
+  if ( whatTheyAskedUs.includes('miten') || whatTheyAskedUs.includes('Miten') ){
+      console.log("I heard miten");
+      let randomAudio = random(miten);
+      let path = thoughts.path + randomAudio.filename;
+      let audio = createAudio( path );
+      audio.addCue(2, next);
+      audio.play();
+  //    audio.onended(continue);
+  }
+
+  //first play back a question including the question word
+
+  /*let randomInterjection = random(thoughts.interjections);
+  let path = thoughts.path + randomInterjection.filename;
+  let interjection = createAudio ( path );
+  interjection.play();
+  */
+
+}
+
+
+function next() {
+  //then play back an interjection
+  //then play back two observations
+  //then echo the audio that the user asked
+
+  let randomQuestion = random(thoughts.questions);
+  let randomAnswer1 = random(thoughts.answers);
+  let randomAnswer2 = random(thoughts.answers);
+  let randomInterjection1 = random(thoughts.interjections);
+  let randomInterjection2 = random(thoughts.interjections);
+  let randomInterjection3 = random(thoughts.interjections);
+
+
+  let randomNext = random([randomQuestion, randomAnswer1, randomAnswer2, randomInterjection1, randomInterjection2, randomInterjection3]);
+  console.log("I chose:");
+  console.log(randomNext);
+
+
+  let path = thoughts.path + randomNext.filename;
+  let nextAudio = createAudio ( path );
+  if(counter < 3){
+    nextAudio.addCue(3, next);
+    nextAudio.play();
+    counter++;
+  }else{
+    nextAudio.play();
+    counter = 0;
+  }
+
+}
+
 
 function hideInfo(){
   this.style.visibility = "hidden";
