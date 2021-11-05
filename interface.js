@@ -161,7 +161,7 @@ function next() {
 
   let path = thoughts.path + randomNext.filename;
   let nextAudio = createAudio ( path );
-  if(counter < 3){
+  if(counter < 5){
     nextAudio.addCue(3, next);
     nextAudio.play();
     counter++;
