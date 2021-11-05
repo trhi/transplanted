@@ -1,4 +1,4 @@
-var mitae = [], miksi = [], miten = [];
+var mitae = [], miksi = [], miten = [], missae = [];
 var counter = 0;
 
 function doInterface(){
@@ -10,27 +10,25 @@ function doInterface(){
 
   infoButton = createButton('i');
   infoButton.addClass('infobutton');
+  infoButton.mouseOver( () => heartButton.attribute('src', 'assets/images/h-EAR-t-i.png') )
+  .mouseOut( () => heartButton.attribute('src', 'assets/images/h-EAR-t.png') );
 
   sortAudiofiles();
 
-
   //let heart = createButton(a);
   //heartButton = createImg('assets/images/heart-broken.jpg');
+
   heartButton = createImg('assets/images/h-EAR-t.png');
   heartButton.parent('heartDIV');
   heartButton.style("visibility: visible");
   //heartButton.addClass('heartButton');
   heartButton.addClass('h-ear-tButton');
   heartButton.mousePressed( () => listenToMyHeart() )
-  .mouseReleased( () => {
-    stopAndClear();
-    //heartButton.attribute('src', 'assets/images/heart-broken.jpg')
-  });
-  heartButton.mouseOut( () => {
-    stopAndClear();
-    //heartButton.attribute('src', 'assets/images/heart-broken.jpg')
-  });
+  .mouseReleased( () => stopAndClear() )
+  .mouseMoved( () => stopAndClear() )
+  .mouseOut( () => stopAndClear() );
 
+  //heartButton.attribute('src', 'assets/images/heart-broken.jpg')
   //heartButton.mouseReleased( () => heartButton.attribute('src', 'assets/images/heart-broken.jpg') );
 
   //canvas.parent('heartDIV');
@@ -67,6 +65,11 @@ function  sortAudiofiles() {
   for( let i=0; i<thoughts.questions.length; i++){
     if( thoughts.questions[i].text.includes('miten') ){
       miten.push(thoughts.questions[i]);
+    }
+  }
+  for( let i=0; i<thoughts.questions.length; i++){
+    if( thoughts.questions[i].text.includes('missä') ){
+      missae.push(thoughts.questions[i]);
     }
   }
 
@@ -108,6 +111,23 @@ function whatDidTheyAskUs(whatTheyAskedUs){
       audio.addCue(2, next);
       audio.play();
   //    audio.onended(continue);
+  }
+  /*
+  if ( whatTheyAskedUs.includes('missä') || whatTheyAskedUs.includes('Missä') ){
+      console.log("I heard missä");
+      let randomAudio = random(missae);
+      let path = thoughts.path + randomAudio.filename;
+      let audio = createAudio( path );
+      audio.addCue(2, next);
+      audio.play();
+
+  //    audio.onended(continue);
+  }
+  */
+
+  if ( whatTheyAskedUs.includes('kaipaan') || whatTheyAskedUs.includes('Kaipaan') ){
+      console.log("I heard kaipaan");
+      //watch out that two matches dont start two sets of audio running
   }
 
   //first play back a question including the question word

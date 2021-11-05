@@ -41,6 +41,7 @@ function preload() {
       //console.log(" *** *** " + speechToText);
       if(event.results[0].isFinal){
         whatDidTheyAskUs(speakingToMyHeart);
+        stopAndClear();
       }
       //speakFromMyHeart(speakingToMyHeart);
       //once the user has once pressed continuously, change the instructions behind this button:

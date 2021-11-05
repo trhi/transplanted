@@ -39,7 +39,7 @@ body{
 
 #questions{
   position: absolute;
-  width: 100px;
+  width: 200px;
   left: 80px;
   top: 60px;
   font-family: "Poppins", Helvetica, Arial, sans-serif;
@@ -57,41 +57,9 @@ body{
 }
 
 .h-ear-tButton {
+  width: 50%;
   border: none;
   cursor: pointer;
-}
-
-.heartButton {
-  font-size: 30vw;
-  text-align: center;
-  border: none;
-  top: 0px;
-  left: 25%;
-  border-radius: 50px;
-  cursor: pointer;
-  background: white;
-}
-
-.heartButton:hover {
-  background-image: 'assets/images/heart.jpg';
-}
-
-.heartButton:active {
-  background-image: 'assets/images/heart-beating.gif';
-}
-
-
-.heartButton {
-  position:absolute;
-  font-size: 50vw;
-  text-align: center;
-  border: none;
-  top: 10%;
-  left: 25%;
-  border-radius: 50px;
-  cursor: pointer;
-  background: white;
-  z-index: 1000;
 }
 
 #toggleAudio {
