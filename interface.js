@@ -10,7 +10,7 @@ function doInterface(){
 
   infoButton = createButton('i');
   infoButton.addClass('infobutton');
-  infoButton.mouseOver( () => heartButton.attribute('src', 'assets/images/h-EAR-t-i.png') )
+  infoButton.mouseOver( () => heartButton.attribute('src', 'assets/images/h-ear-t-i.png') )
   .mouseOut( () => heartButton.attribute('src', 'assets/images/h-EAR-t.png') );
 
   sortAudiofiles();
