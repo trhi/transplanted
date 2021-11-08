@@ -38,7 +38,18 @@
     {"filename": "question35fi.wav", "text": "miksi viihdyn täällä niin hyvin?"},
     {"filename": "question36fi.wav", "text": "niin missä?"},
     {"filename": "question37fi.wav", "text": "niin miten?"},
-    {"filename": "question38fi.wav", "text": "niin miksi?"}
+    {"filename": "question38fi.wav", "text": "niin miksi?"},
+    {"filename": "question39fi.wav", "text": "niin mitä?"},
+    {"filename": "question40fi.wav", "text": "niin miksi?"},
+    {"filename": "question41fi.wav", "text": "kaipaako kasvi juurilleen?"},
+    {"filename": "question42fi.wav", "text": "mikä mieleni muutti?"},
+    {"filename": "question43fi.wav", "text": "mikä muutti mieleni?"},
+    {"filename": "question44fi.wav", "text": "missä on minun paikka?"},
+    {"filename": "question45fi.wav", "text": "missä on juuret?"},
+    {"filename": "question46fi.wav", "text": "missä missä missä?"},
+    {"filename": "question47fi.wav", "text": "miksi miksi miksi?"},
+    {"filename": "question48fi.wav", "text": "miksi miksi miksi?"},
+    {"filename": "question49fi.wav", "text": "mitä?"}
 	],
 	"answers": [
 		{"filename": "answer01fi.wav", "text": "tuntuu että juureni ovat edelleen myös siellä"},
@@ -143,7 +154,11 @@
     {"filename": "answer100fi.wav", "text": "monipaikkaisuus"},
     {"filename": "answer101fi.wav", "text": "aurinko"},
     {"filename": "answer102fi.wav", "text": "aurinko lämmittää minun selkää"},
-    {"filename": "answer103fi.wav", "text": "taisin juurtua, tänne"}
+    {"filename": "answer103fi.wav", "text": "taisin juurtua, tänne"},
+    {"filename": "answer104fi.wav", "text": "tuo joki on valtavan kaunis"},
+    {"filename": "answer105fi.wav", "text": "tunnen kuuluvani tänne"},
+    {"filename": "answer106fi.wav", "text": "pystyn puhumaan ihmisten kanssa"},
+    {"filename": "answer107fi.wav", "text": "olen osa tätä kaikkea"}
 	],
   "interjections": [
     {"filename": "interjection01fi.wav", "text": "niin, ja kaipaan myös..."},
