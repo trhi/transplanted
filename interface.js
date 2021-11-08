@@ -115,7 +115,7 @@ function whatDidTheyAskUs(whatTheyAskedUs){
       audio.play();
   //    audio.onended(continue);
   }
-  /*
+
   if ( whatTheyAskedUs.includes('missä') || whatTheyAskedUs.includes('Missä') ){
       console.log("I heard missä");
       let randomAudio = random(missae);
@@ -126,7 +126,7 @@ function whatDidTheyAskUs(whatTheyAskedUs){
 
   //    audio.onended(continue);
   }
-  */
+  
 
   if ( whatTheyAskedUs.includes('kaipaan') || whatTheyAskedUs.includes('Kaipaan') ){
       console.log("I heard kaipaan, but am not going to react to it.");
