@@ -74,41 +74,44 @@ function  sortAudiofiles() {
   }
 
   console.log("Found these:");
-  console.log(miksi, mitae, miten);
+  console.log(miksi, mitae, miten, missae);
 }
 
 //or a separate function to sort questions/interjections/answers according to words?
 
 function whatDidTheyAskUs(whatTheyAskedUs){
   if ( whatTheyAskedUs.includes('miksi') || whatTheyAskedUs.includes('Miksi') ){
+    counter = 0;
     console.log("I heard miksi");
     //if they asked miski, then let's echo that question back to them:
 
     let randomAudio = random(miksi).filename;
     let path = 'assets/audio/fi/' + randomAudio;
     let audio = createAudio( path );
-    audio.addCue(2, next);
+    audio.addCue(3, next);
     audio.play();
     //audio.play();
   //  audio.onended(continue);
   }
   if ( whatTheyAskedUs.includes('mitä') || whatTheyAskedUs.includes('Mitä')){
+    counter = 0;
     console.log("I heard mitä");
     let randomAudio = random(mitae).filename;
     let path = 'assets/audio/fi/' + randomAudio;
     let audio = createAudio( path );
-    audio.addCue(2, next);
+    audio.addCue(3, next);
     audio.play();
     //audio.play();
   //  audio.onended(continue);
 
   }
   if ( whatTheyAskedUs.includes('miten') || whatTheyAskedUs.includes('Miten') ){
+      counter = 0;
       console.log("I heard miten");
       let randomAudio = random(miten);
       let path = thoughts.path + randomAudio.filename;
       let audio = createAudio( path );
-      audio.addCue(2, next);
+      audio.addCue(3, next);
       audio.play();
   //    audio.onended(continue);
   }
@@ -126,7 +129,7 @@ function whatDidTheyAskUs(whatTheyAskedUs){
   */
 
   if ( whatTheyAskedUs.includes('kaipaan') || whatTheyAskedUs.includes('Kaipaan') ){
-      console.log("I heard kaipaan");
+      console.log("I heard kaipaan, but am not going to react to it.");
       //watch out that two matches dont start two sets of audio running
   }
 
@@ -159,13 +162,20 @@ function next() {
   console.log(randomNext);
 
 
-  let path = thoughts.path + randomNext.filename;
-  let nextAudio = createAudio ( path );
+  var path = thoughts.path + randomNext.filename;
+  var nextAudio = createAudio ( path );
   if(counter < 5){
-    nextAudio.addCue(3, next);
+    console.log("Counter is now: " + counter + ", and I will add another cue");
+    console.log("nextAudio is now:");
+    console.log(nextAudio);
+    nextAudio.addCue(2, next);
     nextAudio.play();
     counter++;
+    console.log("Counter is now: " + counter + ", I just added another cue");
+    console.log("nextAudio is now:");
+    console.log(nextAudio);
   }else{
+    console.log("Counter is now: " + counter + ", and I am stopping");
     nextAudio.play();
     counter = 0;
   }
