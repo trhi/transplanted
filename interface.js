@@ -1,4 +1,4 @@
-var mitae = [], miksi = [], miten = [], missae = [];
+var mitae = [], miksi = [], miten = [], missae = [], juuret = [], kaipuu = [];
 var counter = 0;
 
 function doInterface(){
@@ -15,9 +15,6 @@ function doInterface(){
 
   sortAudiofiles();
 
-  //let heart = createButton(a);
-  //heartButton = createImg('assets/images/heart-broken.jpg');
-
   heartButton = createImg('assets/images/h-EAR-t.png');
   heartButton.parent('heartDIV');
   heartButton.style("visibility: visible");
@@ -27,12 +24,6 @@ function doInterface(){
   .mouseReleased( () => stopAndClear() )
   .mouseMoved( () => stopAndClear() )
   .mouseOut( () => stopAndClear() );
-
-  //heartButton.attribute('src', 'assets/images/heart-broken.jpg')
-  //heartButton.mouseReleased( () => heartButton.attribute('src', 'assets/images/heart-broken.jpg') );
-
-  //canvas.parent('heartDIV');
-  //heartButton.parent('heartDIV');
 }
 
 function stopAndClear(){
@@ -48,106 +39,77 @@ function listenToMyHeart() {
   //heartButton.attribute('src', 'assets/images/heart-beating.gif');
   heartButton.attribute('src', 'assets/images/h-EAR-t.gif');
   listener.start();
-
 }
 
 function  sortAudiofiles() {
   for( let i=0; i<thoughts.questions.length; i++){
-    if( thoughts.questions[i].text.includes('miksi') ){
-      miksi.push(thoughts.questions[i]);
-    }
+          if( thoughts.questions[i].text.includes('miksi') ){
+            miksi.push(thoughts.questions[i]);
+          }
+          if( thoughts.questions[i].text.includes('mitä') ){
+            mitae.push(thoughts.questions[i]);
+          }
+          if( thoughts.questions[i].text.includes('miten') ){
+            miten.push(thoughts.questions[i]);
+          }
+          if( thoughts.questions[i].text.includes('missä') ){
+            missae.push(thoughts.questions[i]);
+          }
+          if( /juur/gi.test(thoughts.questions[i].text) ){
+            juuret.push(thoughts.questions[i]);
+          }
+          if( /kaip|kaiv/gi.test(thoughts.questions[i].text) ){
+            kaipuu.push(thoughts.questions[i]);
+          }
   }
-  for( let i=0; i<thoughts.questions.length; i++){
-    if( thoughts.questions[i].text.includes('mitä') ){
-      mitae.push(thoughts.questions[i]);
-    }
-  }
-  for( let i=0; i<thoughts.questions.length; i++){
-    if( thoughts.questions[i].text.includes('miten') ){
-      miten.push(thoughts.questions[i]);
-    }
-  }
-  for( let i=0; i<thoughts.questions.length; i++){
-    if( thoughts.questions[i].text.includes('missä') ){
-      missae.push(thoughts.questions[i]);
-    }
-  }
-
   console.log("Found these:");
   console.log(miksi, mitae, miten, missae);
+  console.log(juuret, kaipuu);
 }
 
-//or a separate function to sort questions/interjections/answers according to words?
-
 function whatDidTheyAskUs(whatTheyAskedUs){
-  if ( whatTheyAskedUs.includes('miksi') || whatTheyAskedUs.includes('Miksi') ){
-    counter = 0;
-    console.log("I heard miksi");
-    //if they asked miski, then let's echo that question back to them:
 
-    let randomAudio = random(miksi).filename;
-    let path = 'assets/audio/fi/' + randomAudio;
-    let audio = createAudio( path );
-    audio.addCue(3, next);
-    audio.play();
-    //audio.play();
-  //  audio.onended(continue);
-  }
-  if ( whatTheyAskedUs.includes('mitä') || whatTheyAskedUs.includes('Mitä')){
-    counter = 0;
-    console.log("I heard mitä");
-    let randomAudio = random(mitae).filename;
-    let path = 'assets/audio/fi/' + randomAudio;
-    let audio = createAudio( path );
-    audio.addCue(3, next);
-    audio.play();
-    //audio.play();
-  //  audio.onended(continue);
+       if ( /miksi/ig.test(whatTheyAskedUs) ){
+          counter = 0;
+        //  console.log("I heard miksi");
+          selectRandom(miksi);
+      } else if ( /mitä/ig.test(whatTheyAskedUs) ){
+          counter = 0;
+          //console.log("I heard mitä");
+          selectRandom(mitae);
+      } else if ( /miten/ig.test(whatTheyAskedUs) ){
+            counter = 0;
+            //console.log("I heard miten");
+            selectRandom(miten);
+      } else if ( /missä/ig.test(whatTheyAskedUs) ){
+            //console.log("I heard missä");
+            selectRandom(missae);
+      } else if ( /kaip|kaiv/ig.test(whatTheyAskedUs) ){
+            counter = 0;
+          //  console.log("I heard kaipuu");
+            selectRandom(kaipuu);
+        } else if ( /juur/ig.test(whatTheyAskedUs) ){
+            counter = 0;
+            //console.log("I heard juuret");
+            selectRandom(juuret);
+        }
 
-  }
-  if ( whatTheyAskedUs.includes('miten') || whatTheyAskedUs.includes('Miten') ){
-      counter = 0;
-      console.log("I heard miten");
-      let randomAudio = random(miten);
-      let path = thoughts.path + randomAudio.filename;
+}//end whatDidTheyAskUs
+
+function selectRandom(array){
+      let randomChoice = random(array);
+      console.log("First selection:");
+      console.log(randomChoice);
+      let path = 'assets/audio/fi/' + randomChoice.filename;
       let audio = createAudio( path );
       audio.addCue(3, next);
       audio.play();
-  //    audio.onended(continue);
-  }
-
-  if ( whatTheyAskedUs.includes('missä') || whatTheyAskedUs.includes('Missä') ){
-      console.log("I heard missä");
-      let randomAudio = random(missae);
-      let path = thoughts.path + randomAudio.filename;
-      let audio = createAudio( path );
-      audio.addCue(2, next);
-      audio.play();
-
-  //    audio.onended(continue);
-  }
-  
-
-  if ( whatTheyAskedUs.includes('kaipaan') || whatTheyAskedUs.includes('Kaipaan') ){
-      console.log("I heard kaipaan, but am not going to react to it.");
-      //watch out that two matches dont start two sets of audio running
-  }
-
-  //first play back a question including the question word
-
-  /*let randomInterjection = random(thoughts.interjections);
-  let path = thoughts.path + randomInterjection.filename;
-  let interjection = createAudio ( path );
-  interjection.play();
-  */
-
 }
-
 
 function next() {
   //then play back an interjection
   //then play back two observations
-  //then echo the audio that the user asked
+  //then echo the audio that the user asked?
 
   let randomQuestion = random(thoughts.questions);
   let randomAnswer1 = random(thoughts.answers);
@@ -156,32 +118,28 @@ function next() {
   let randomInterjection2 = random(thoughts.interjections);
   let randomInterjection3 = random(thoughts.interjections);
 
-
   let randomNext = random([randomQuestion, randomAnswer1, randomAnswer2, randomInterjection1, randomInterjection2, randomInterjection3]);
   console.log("I chose:");
   console.log(randomNext);
 
-
   var path = thoughts.path + randomNext.filename;
   var nextAudio = createAudio ( path );
   if(counter < 5){
-    console.log("Counter is now: " + counter + ", and I will add another cue");
-    console.log("nextAudio is now:");
-    console.log(nextAudio);
-    nextAudio.addCue(2, next);
-    nextAudio.play();
-    counter++;
-    console.log("Counter is now: " + counter + ", I just added another cue");
-    console.log("nextAudio is now:");
-    console.log(nextAudio);
+        console.log("Counter is now: " + counter + ", and I will add another cue");
+        console.log("nextAudio is now:");
+        console.log(nextAudio);
+        nextAudio.addCue(2, next);
+        nextAudio.play();
+        counter++;
+        console.log("Counter is now: " + counter + ", I just added another cue");
+        console.log("nextAudio is now:");
+        console.log(nextAudio);
   }else{
-    console.log("Counter is now: " + counter + ", and I am stopping");
-    nextAudio.play();
-    counter = 0;
+        console.log("Counter is now: " + counter + ", and I am stopping");
+        nextAudio.play();
+        counter = 0;
   }
-
 }
-
 
 function hideInfo(){
   this.style.visibility = "hidden";
