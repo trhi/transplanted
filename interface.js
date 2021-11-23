@@ -11,11 +11,11 @@ function doInterface(){
   infoButton = createButton('i');
   infoButton.addClass('infobutton');
   infoButton.mouseOver( () => heartButton.attribute('src', 'assets/images/h-ear-t-i.png') )
-  .mouseOut( () => heartButton.attribute('src', 'assets/images/h-EAR-t.png') );
+  .mouseOut( () => heartButton.attribute('src', 'assets/images/h-ear-t.png') );
 
   sortAudiofiles();
 
-  heartButton = createImg('assets/images/h-EAR-t.png');
+  heartButton = createImg('assets/images/h-ear-t.png');
   heartButton.parent('heartDIV');
   heartButton.style("visibility: visible");
   //heartButton.addClass('heartButton');
@@ -29,7 +29,7 @@ function doInterface(){
 function stopAndClear(){
   $("#questions").css('opacity', '0.3');
   //heartButton.attribute('src', 'assets/images/heart-broken.jpg')
-  heartButton.attribute('src', 'assets/images/h-EAR-t.png')
+  heartButton.attribute('src', 'assets/images/h-ear-t.png')
   listener.stop();
 }
 
@@ -37,7 +37,7 @@ function listenToMyHeart() {
   $("#questions").text('');
   $("#questions").css('opacity', '1');
   //heartButton.attribute('src', 'assets/images/heart-beating.gif');
-  heartButton.attribute('src', 'assets/images/h-EAR-t.gif');
+  heartButton.attribute('src', 'assets/images/h-ear-t.gif');
   listener.start();
 }
 

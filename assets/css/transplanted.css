@@ -31,6 +31,12 @@ body{
 
 }
 
+#prompts{
+  font-size: 40px;
+  font-family: "Poppins", Helvetica, Arial, sans-serif;
+  color: #f6f6f6;
+}
+
 #container{
   position: relative;
   width: window.innerWidth;

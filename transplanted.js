@@ -26,11 +26,11 @@ function preload() {
 
     listener.onresult = (event) => {
       speakingToMyHeart = event.results[0][0].transcript;
-      console.log(speakingToMyHeart);
-      $("#questions").html('" <em>' + speakingToMyHeart + '<em>? "');
+      //console.log(speakingToMyHeart);
+      $("#questions").html('" <em>' + speakingToMyHeart.toLowerCase() + '<em> ? "');
       //console.log(" *** *** " + speechToText);
       if(event.results[0].isFinal){
-        whatDidTheyAskUs(speakingToMyHeart);
+        whatDidTheyAskUs(speakingToMyHeart.toLowerCase());
         stopAndClear();
       }
     }
