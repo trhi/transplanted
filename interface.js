@@ -8,9 +8,11 @@ function doInterface(){
   canvas.id('canvas');
   background("transparent");
 
+
+
   infoButton = createButton('i');
   infoButton.addClass('infobutton');
-  infoButton.mouseOver( () => heartButton.attribute('src', 'assets/images/h-ear-t-i.png') )
+  infoButton.mouseOver( () => heartButton.attribute('src', 'assets/images/h-ear-t-info.png') )
   .mouseOut( () => heartButton.attribute('src', 'assets/images/h-ear-t.png') );
 
   sortAudiofiles();
