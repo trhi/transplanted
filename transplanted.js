@@ -1,5 +1,6 @@
   let a = "💔";
   var listener, canvas, heartButton, speakingToMyHeart, infoButton, url, language, thoughts;
+  let isSpeechRecognitionSupported = false;
 
 function preload() {
 
@@ -7,7 +8,7 @@ function preload() {
 
   language = 'fi'; //or set this using a button when you support more languages
 
-  var isSpeechRecognitionSupported = false;
+  //var isSpeechRecognitionSupported = false;
   try {
     //disable all of this if window doesn't have webkitSpeechRecognition or SpeechRecognition
     window.SpeechRecognition = window.webkitSpeechRecognition || window.SpeechRecognition;
@@ -15,34 +16,40 @@ function preload() {
     isSpeechRecognitionSupported = true;
   } catch (err) {
     console.log("Speech recognition is not supported");
+    window.alert("Please view this work in Chrome");
   }
 
   if (isSpeechRecognitionSupported){
-    window.SpeechRecognition = window.webkitSpeechRecognition || window.SpeechRecognition;
-    listener = new SpeechRecognition;
-    listener.lang = 'fi-FI';
-    listener.interimResults = true;
-    listener.continuous = true;
 
-    listener.onresult = (event) => {
-      speakingToMyHeart = event.results[0][0].transcript;
-      //console.log(speakingToMyHeart);
-      $("#questions").html('" <em>' + speakingToMyHeart.toLowerCase() + '<em> ? "');
-      //console.log(" *** *** " + speechToText);
-      if(event.results[0].isFinal){
-        whatDidTheyAskUs(speakingToMyHeart.toLowerCase());
-        stopAndClear();
-      }
-    }
-  }
+        window.SpeechRecognition = window.webkitSpeechRecognition || window.SpeechRecognition;
+        listener = new SpeechRecognition;
+        listener.lang = 'fi-FI';
+        listener.interimResults = true;
+        listener.continuous = true;
 
-  url = 'assets/audio/' + language + '/' + 'thoughts.json';
-  thoughts = loadJSON(url);
+        listener.onresult = (event) => {
+          speakingToMyHeart = event.results[0][0].transcript;
+          //console.log(speakingToMyHeart);
+          $("#questions").html('" <em>' + speakingToMyHeart.toLowerCase() + '<em> ? "');
+          //console.log(" *** *** " + speechToText);
+          if(event.results[0].isFinal){
+            whatDidTheyAskUs(speakingToMyHeart.toLowerCase());
+            stopAndClear();
+          }
+        }
 
-}
+
+      url = 'assets/audio/' + language + '/' + 'thoughts.json';
+      thoughts = loadJSON(url);
+
+    }//end if(isSpeechRecognitionSupported)
+
+}//end preload()
 
 function setup(){
-  doInterface();
+  if (isSpeechRecognitionSupported){
+    doInterface();
+  }
 } //close setup
 
 function draw(){

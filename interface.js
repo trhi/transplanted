@@ -37,7 +37,7 @@ function stopAndClear(){
 
 function listenToMyHeart() {
   $("#questions").text('');
-  $("#questions").text('" 🎤  "');
+  $("#questions").text('" 🎤  "'); // 🗣️  🎤  
   $("#questions").css('opacity', '1');
   //heartButton.attribute('src', 'assets/images/heart-beating.gif');
   heartButton.attribute('src', 'assets/images/h-ear-t.gif');
