@@ -1,5 +1,6 @@
 var mitae = [], miksi = [], miten = [], missae = [], rihmasto = [], juuret = [], kaipuu = [], keywords = [], structure = [];
 var counter = 0;
+var instructions;
 
 function doInterface(){
 
@@ -8,10 +9,21 @@ function doInterface(){
   canvas.id('canvas');
   background("transparent");
 
+  //instructions = $('#instructions');
+
   infoButton = createButton('i');
   infoButton.addClass('infobutton');
-  infoButton.mouseOver( () => heartButton.attribute('src', 'assets/images/h-ear-t-info.png') )
-  .mouseOut( () => heartButton.attribute('src', 'assets/images/h-ear-t.png') );
+  //infoButton.mouseOver( () => heartButton.attribute('src', 'assets/images/h-ear-t-info.png') )
+  //.mouseOut( () => heartButton.attribute('src', 'assets/images/h-ear-t.png') );
+
+  infoButton.mouseOver( () => {
+    console.log("mousing in");
+    $("#instructions").show();
+    })
+  .mouseOut( () => {
+    console.log("mousing out");
+    $('#instructions').hide();
+    });
 
   heartButton = createImg('assets/images/h-ear-t.png');
   heartButton.parent('heartDIV');
@@ -42,7 +54,7 @@ function listenToMyHeart() {
 function museAboutBeingTransplanted(whatTheyAskedUs){
 
   //identify any keywords spoken:
-  keywords = whatTheyAskedUs.match(/miksi|mitä|miten|missä|rihmasto|kaip|kaiv|juur|elämä|viih|ihmi|tässä|tääl/ig);
+  keywords = whatTheyAskedUs.match(/miksi|mitä|miten|missä|tänne|tääl|tässä|siellä|paikka|järv|metsä|rihmasto|juur|kasv|maas|muut|elämä|kaip|kaiv|tunn|tunt|viih|ihmi/ig);
   console.log("these are the keywords I heard: ", keywords);
 
   //selects some thoughts to playback based on these keywords:

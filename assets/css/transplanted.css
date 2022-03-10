@@ -24,11 +24,6 @@ body{
   border: 2px solid #000;
   border-color: black;
   background: white;
-
-}
-
-.transplanted-text{
-
 }
 
 #prompts{
@@ -62,20 +57,25 @@ body{
   position:absolute;
 }
 
+#instructions{
+  position: absolute;
+  font-family: "Poppins", Helvetica, Arial, sans-serif;
+  width: 350px;
+  max-height: 200px;
+  left: 100px;
+  top: 45px;
+  z-index: 1000;
+  background-color: #FFF;
+  border-radius: 10px;
+  border: 2px solid #000;
+  line-height: 1;
+  padding-left: 30px;
+  padding-right: 30px;
+
+}
+
 .h-ear-tButton {
   width: 50%;
   border: none;
   cursor: pointer;
-}
-
-#toggleAudio {
-  left: 230px;
-}
-
-#backward {
-  left: 30px;
-}
-
-#backward {
-
 }
