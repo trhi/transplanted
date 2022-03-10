@@ -1,10 +1,8 @@
-  let a = "💔";
   var listener, canvas, heartButton, speakingToMyHeart, infoButton, url, language, thoughts;
+  var a = [], i = [], q = [], structures = [];
   let isSpeechRecognitionSupported = false;
 
 function preload() {
-
-  // Nothing besides load calls (loadImage, loadJSON, loadFont, loadStrings, etc.) should be inside the preload function
 
   language = 'fi'; //or set this using a button when you support more languages
 
@@ -29,12 +27,12 @@ function preload() {
 
         listener.onresult = (event) => {
           speakingToMyHeart = event.results[0][0].transcript;
-          //console.log(speakingToMyHeart);
           $("#questions").html('" <em>' + speakingToMyHeart.toLowerCase() + '<em> ? "');
-          //console.log(" *** *** " + speechToText);
           if(event.results[0].isFinal){
-            whatDidTheyAskUs(speakingToMyHeart.toLowerCase());
+            //museAboutBeingTransplanted based on what the user spoke to the heart
+            museAboutBeingTransplanted(speakingToMyHeart.toLowerCase());
             stopAndClear();
+            //disable button while transplanted is responding? :
           }
         }
 
@@ -47,6 +45,16 @@ function preload() {
 }//end preload()
 
 function setup(){
+  a = thoughts.answers;
+  i = thoughts.interjections;
+  q = thoughts.questions;
+  structures = [
+    [q, a, a, i, a, q],
+    [q, i, q],
+    [q, i, a, a, i, q],
+    [q, a, i],
+    [q, q, i]
+  ];
   if (isSpeechRecognitionSupported){
     doInterface();
   }
