@@ -1,6 +1,22 @@
 var mitae = [], miksi = [], miten = [], missae = [], rihmasto = [], juuret = [], kaipuu = [], keywords = [], structure = [];
 var counter = 0;
 var instructions;
+var prompts = [
+      'mitä kaipaan ? ',
+      'voiko ihminen juurtua ? ',
+      'miksi olen täällä ? ',
+      'miten ihminen juurtuu ? ',
+      'mitä kaipuu on ? ',
+      'miksi viihdyn täällä niin hyvin ? ',
+      'miksi muutin pois ? ',
+      'missä elämä on ? ',
+      'miksi olen tässä ? ',
+      'missä on juuret ? ',
+      'miksi kaivata paikaan, jossa ei ole ? ',
+      'olenko rihmasto ? ',
+      'missä on minun paikka ? ',
+      'miksi olen täällä ? '
+    ];
 
 function doInterface(){
 
@@ -17,11 +33,9 @@ function doInterface(){
   //.mouseOut( () => heartButton.attribute('src', 'assets/images/h-ear-t.png') );
 
   infoButton.mouseOver( () => {
-    console.log("mousing in");
     $("#instructions").show();
     })
   .mouseOut( () => {
-    console.log("mousing out");
     $('#instructions').hide();
     });
 
@@ -43,15 +57,17 @@ function stopAndClear(){
 }
 
 function listenToMyHeart() {
+  $("#questions").show();
   $("#questions").text('');
-  $("#questions").text('" 🎤  "'); // 🗣️  🎤
   $("#questions").css('opacity', '1');
-  //heartButton.attribute('src', 'assets/images/heart-beating.gif');
+  $("#questions").text('" 🎤  "'); // 🗣️  🎤
   heartButton.attribute('src', 'assets/images/h-ear-t.gif');
   listener.start();
 }
 
 function museAboutBeingTransplanted(whatTheyAskedUs){
+
+  //stopAndClear();
 
   //identify any keywords spoken:
   keywords = whatTheyAskedUs.match(/miksi|mitä|miten|missä|tänne|tääl|tässä|siellä|paikka|järv|metsä|rihmasto|juur|kasv|maas|muut|elämä|kaip|kaiv|tunn|tunt|viih|ihmi/ig);
@@ -64,6 +80,7 @@ function museAboutBeingTransplanted(whatTheyAskedUs){
   //return play(selections); //if I had play returning a deferred that would re-enable the button once resolved
   //which would undoubtedly be the better way to do this!
   play(selections);
+  $("#questions").fadeOut( 2000 );
 
 }
 
