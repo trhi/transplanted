@@ -100,23 +100,6 @@ body{
   cursor: pointer;
 }
 
-#english-subtitles{
-  font-family: "Poppins", Helvetica, Arial, sans-serif;
-  font-size: 18px;
-  text-align: center;
-  z-index: 1000;
-  top: 40px;
-  right: 40px;
-  width: 45px;
-  height: 45px;
-  border-radius: 50px;
-  position: fixed;
-  cursor: pointer;
-  border: 2px solid #000;
-  border-color: black;
-  background: white;
-}
-
 #subtitles-button-info{
   position: absolute;
   width: 200px;
@@ -139,6 +122,47 @@ body{
   z-index: 10;
 }
 
+#infinity-button-info-en{
+  position: absolute;
+  width: 200px;
+  right: 40px;
+  top: 60px;
+  font-family: "Poppins", Helvetica, Arial, sans-serif;
+  text-align: left;
+  font-size: 18px;
+  z-index: 10;
+}
+
+#infinity-button-info-fi{
+  position: absolute;
+  width: 200px;
+  right: 40px;
+  top: 60px;
+  font-family: "Poppins", Helvetica, Arial, sans-serif;
+  text-align: left;
+  font-size: 18px;
+  z-index: 10;
+}
+
+
+#select-infinity{
+  font-family: "Poppins", Helvetica, Arial, sans-serif;
+  font-size: 30px;
+  text-align: center;
+  line-height: 0;
+  z-index: 1000;
+  top: 40px;
+  right: 140px;
+  width: 45px;
+  height: 45px;
+  border-radius: 50px;
+  position: fixed;
+  cursor: pointer;
+  border: 2px solid #000;
+  border-color: black;
+  background: white;
+}
+
 #select-finnish{
   font-family: "Poppins", Helvetica, Arial, sans-serif;
   font-size: 18px;
@@ -156,6 +180,23 @@ body{
   background: white;
 }
 
+#select-english{
+  font-family: "Poppins", Helvetica, Arial, sans-serif;
+  font-size: 18px;
+  text-align: center;
+  z-index: 1000;
+  top: 40px;
+  right: 40px;
+  width: 45px;
+  height: 45px;
+  border-radius: 50px;
+  position: fixed;
+  cursor: pointer;
+  border: 2px solid #000;
+  border-color: black;
+  background: white;
+}
+
 #answers{
   position: absolute;
   padding-left: 20px;
@@ -163,6 +204,7 @@ body{
   padding-bottom: 10px;
   border-radius: 10px;
   width: 400px;
+  max-height: 400px;
   right: 80px;
   top: 100px;
   font-family: "Poppins", Helvetica, Arial, sans-serif;

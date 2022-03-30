@@ -1,4 +1,5 @@
 var mitae = [], miksi = [], miten = [], missae = [], rihmasto = [], juuret = [], kaipuu = [], keywords = [], structure = [];
+var infinity;
 var counter = 0;
 var instructions;
 var prompts = [ //ended up not using these
@@ -28,21 +29,59 @@ function doInterface(){
   infoButton = createButton('i');
   infoButton.addClass('infobutton');
 
-/*
+
   //infinityButton: infinite musing by Transplanted
   infinityButton = createButton('∞');
-  infinityButton.id();
-  infinityButton.mousePressed( () => {
-    //stop listener
-    //also disable heartButton?
-    //ahhh! Perfect: subtitles will go on and off automatically,
-    //even if the person selects between Finnish and English while in infinity mode
-    //BUT: have to check under languageButtons: if infinity mode: do not allow heartButton
+  infinityButton.id("select-infinity");
+  infinityButton.mouseOver( () => {
+    if (language == 'en'){
+      $("#infinity-button-info-en").show();
+    }
+    if (language == 'fi'){
+      $("#infinity-button-info-fi").show();
+    }
+  }).mouseOut( () => {
+    if (language == 'en'){
+      $("#infinity-button-info-en").hide();
+    }
+    if (language == 'fi'){
+      $("#infinity-button-info-fi").hide();
+    }
+  });
 
-    listener.stop();
+  infinity = false;
+  infinityButton.mousePressed( () => {
+
+    if(!infinity){
+      infinityButton.style("background: #ff1e8c");
+      infinityButton.style('filter', 'drop-shadow(0 0 0.5rem #ff1e8c');
+      infinity = true;
+      listener.stop();
+
+      //disable heartButton:
+      heartButton.mousePressed( () => console.log("disbaled heartButton") );
+
+      if(infinity){
+        museAboutBeingTransplanted("infinity");
+      }
+
+    }else{
+    //turn off infinityButton
+      infinityButton.style("background: white");
+      infinityButton.style("filter: none");
+      infinity = false;
+      console.log("infinity is false");
+      $('#audio').empty();
+      $("#answers").stop(true, true).empty().hide();
+
+      //enable heartButton:
+      heartButton.mousePressed( () => listenToMyHeart() )
+      .mouseReleased( () => stopAndClear() )
+      .mouseMoved( () => stopAndClear() )
+      .mouseOut( () => stopAndClear() );
+    }
 
   });
-  */
 
   //finnishButton: speak to Transplanted in Finnish and no transcript visible
   finnishButton = createButton('fi');
@@ -74,7 +113,7 @@ function doInterface(){
 
   //englishButton: (or rather englishButton?) speak to Transplanted in English, and translated transcript visible
   englishButton = createButton('en');
-  englishButton.id('english-subtitles');
+  englishButton.id('select-english');
   englishButton.mouseOver( () => {
     $("#subtitles-button-info").show();
 
@@ -166,20 +205,24 @@ function museAboutBeingTransplanted(whatTheyAskedUs){
 } else if (language == 'en'){
   keywords = whatTheyAskedUs.match(/why|what|how|where|here|there|place|lake|forest|rhizome|root|grow|ground|move|life|miss|feel|familiar|enjoy|human/ig);
 }
-  //console.log("these are the keywords I heard: ", keywords);
 
-  //select structure already at this point:
-  let structure = random(structures);
+  var structure = [];
+  if( whatTheyAskedUs.match(/infinity/ig) ){
+    //if its in infinity mode: create a new structure by making a HUUUUUGE array:
+    for(let inf = 0; inf < 88; inf++){
+      let randomCategory = random(structures[0]);
+      structure.push( randomCategory );
+    }
+    keywords = ['infinity'];
+  } else {
+    //select structure from the preconceived ones:
+    structure = random(structures);
+  }
 
   //selects some thoughts to playback based on these keywords:
   var selections = selectThoughts(keywords, structure);
-  //console.log("These are my selections:", selections);
-  //then playback the selections:
-  //return play(selections); //if I had play returning a deferred that would re-enable the button once resolved
-  //which would undoubtedly be the better way to do this!
   $("#questions").fadeOut( 2000 );
   play(selections);
-  //play(selections).then( () => $("#answers").hide() );
 
 }
 
@@ -191,12 +234,16 @@ function selectThoughts(keywords, structure){
   //for the following ones, choose random ones
   var l, j, k, selections = [], matches = [];
   for(l=0; l < structure.length; l++){
+    //if I pass it keywords=null and structure = [], then it will do: selections.push(random(i)) == random interjection..
     if(l==0){ //choose the first random musing so that it matches a keyword in the users speech
-      if(keywords == null){
+      if(keywords == null || keywords[0] == 'infinity'){
         //if the system doesn't recognise any keywords,
         //just choose an interjection (a small response, a musing... but no huge response):
+        //OR if its in inifity mode: just push a random element
         selections.push(random(i));
-        l=1000; //so that it breaks out of the for loop after selecting the interjection
+        if(keywords == null){
+          l=1000; //so that it breaks out of the for loop after selecting just one interjection, in case the person spoke nonsense
+        }
       } else { //find all the sentences where a keyword occurs
           for(j=0; j<structure[l].length; j++){
             for(k=0; k<keywords.length; k++){
@@ -241,7 +288,6 @@ function play(selections){ //this is not going to return a deferred, because our
   audioDiv.empty();
   //$("#answers").stop(true, true).empty().hide(); //perhaps this
   $("#answers").hide();
-  //var deferred = $.Deferred(); //if we wanted this to use promises to chain events after playing is all done
   var loading = 0;
   var playing = 0;
 
@@ -251,7 +297,17 @@ function play(selections){ //this is not going to return a deferred, because our
     if(language == 'en'){
       $("#answers").show();
       $("#answers").append("<span>" + audios[playing].getAttribute('subtitleEN') + "</span>", "<br>");
-      $("#answers").fadeOut( 40000 , () => $("#answers").hide() );
+
+      if(infinity){
+        //once 8 lines are displayed, remove the first one:
+        if($("#answers").children().length == 18 ){
+          $("#answers").children().slice(0, 2).remove();
+        }
+      }
+
+      if(!infinity){
+        $("#answers").fadeOut( 40000 , () => $("#answers").hide() );
+      }
     }
   }
 

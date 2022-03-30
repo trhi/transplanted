@@ -46,14 +46,16 @@ function preload() {
 }//end preload()
 
 function setup(){
+  //these are all arrays of snippets:
   a = thoughts.answers;
   i = thoughts.interjections;
   q = thoughts.questions;
+  //this is in turn an array of arrays:
   structures = [
+    [q, a, i],
     [q, a, a, i, a, q],
     [q, i, q],
     [q, i, a, a, i, q],
-    [q, a, i],
     [q, q, i]
   ];
   if (isSpeechRecognitionSupported){
