@@ -20,22 +20,41 @@
 
 <div id="audio"></div>
   <div id='container' style="visibility: visible; position:relative">
-    <div id='instructions' style="display: none">
-      <p>mobiili: näpäytä sydäntä</p>
-        <p style="margin-left:20px"><em>äänimerkki</em> - äänitys päällä</p>
-        <p style="margin-left:20px"><em>toinen äänimerkki</em> - äänitys pois päältä</p>
-      <p>tietokone: paina sydän pohjaan:</p>
-        <p style="margin-left:20px"><em>sydän lyö</em> - äänitys päällä</p>
-        <p style="margin-left:20px"><em>sydän ei lyö</em> - äänitys pois päältä</p>
+    <div class="instructions" id='instructions-fi' style="display: none">
+      <p><b>sydän</b>: paina pohjaan (tietokone)</p>
+      <p>tai näpäytä (mobiili) ja puhu</p>
+      <p>laita äänet päälle</p>
         <p>äänitys litteroidaan Googlen palvelimella</p>
         <p>näet litteroidun puheen ruudulla</p>
         <p><em>kuuntele(n)</em> ja puhu(n), ja <em>kuuntele(n)</em></p>
       </p>
     </div>
 
+    <div class='instructions' id='instructions-en' style="display: none">
+      <p><b>h-ear-t:</b> hold down (computer) </p>
+        <p>or tap (mobile) to talk</p>
+        <p>turn on your sound</p>
+        <p>recording transcribed on Googles server</p>
+        <p>transcript appears on the screen</p>
+        <p><em>Transplanted</em> will muse in Finnish only</p>
+      </p>
+    </div>
+
+    <div id="subtitles-button-info" class='instructions' style="display: none">
+      <p>speak in English</p>
+      <p>subtitles in English</p>
+    </div>
+
+    <div id="finnish-button-info" class='instructions' style="display: none">
+      <p>speak in Finnish</p>
+    </div>
+
+
+
     <p id='prompts'></p>
     <div id='heartDIV' style="visibility: visible"></div>
     <div id='questions'></div>
+    <div id='answers' style="display: none"></div>
   </div>
 </body>
 </html>

@@ -1,10 +1,11 @@
-  var listener, canvas, heartButton, speakingToMyHeart, infoButton, url, language, thoughts;
+  var listener, canvas, heartButton, speakingToMyHeart, infoButton, finnishButton, englishButton, infinityButton, url, language, subtitles, thoughts;
   var a = [], i = [], q = [], structures = [];
   let isSpeechRecognitionSupported = false;
 
 function preload() {
 
   language = 'fi'; //or set this using a button when you support more languages
+  subtitles = false;
 
   //var isSpeechRecognitionSupported = false;
   try {
