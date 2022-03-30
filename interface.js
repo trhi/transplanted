@@ -53,6 +53,10 @@ function doInterface(){
   infinityButton.mousePressed( () => {
 
     if(!infinity){
+      //infinityButton.innerText = '8';
+      //document.getElementById(select-infinity).textContent = '8';
+      //infinityButton.html('8');
+
       infinityButton.style("background: #ff1e8c");
       infinityButton.style('filter', 'drop-shadow(0 0 0.5rem #ff1e8c');
       infinity = true;
@@ -315,6 +319,12 @@ function play(selections){ //this is not going to return a deferred, because our
     //map=iterate through all the selections and create an audio element for each
     //with event handlers that control when to move onto playing the next audio
     loading++;
+
+    //set infinity button text content to 8 while the audio files are loading:
+    if(loading == 1){
+      infinityButton.html('⧖'); //⧖ ⧖ ⧖ ⏱  ◴◵◶ ◷◶◵◴ &#x23f3
+    }
+
     var audio = $( "<audio></audio>", {
       src: thoughts.path+thought.filename,
       txt: thought.text,
@@ -322,9 +332,12 @@ function play(selections){ //this is not going to return a deferred, because our
       preload: 'auto',
       on: {
         canplaythrough: function(event){
+          //console.log("loading is:", loading);
+          // 88 -> 1
           loading--;
           if(loading === 0){
             playNext();
+            infinityButton.html('∞');
           }
         },//close canplaythrough:
         ended: function(event){
