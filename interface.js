@@ -74,7 +74,7 @@ function doInterface(){
       infinityButton.style("background: white");
       infinityButton.style("filter: none");
       infinity = false;
-      console.log("infinity is false");
+      //console.log("infinity is false");
       $('#audio').empty();
       $("#answers").stop(true, true).empty().hide();
 
