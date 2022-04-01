@@ -61,7 +61,6 @@
     {"filename": "answer07fi.wav", "text": "juuriani ei päältäpäin näe", "subtitleEN": "my roots are not visible"},
     {"filename": "answer08fi.wav", "text": "tietenkin kaipaan sinne", "subtitleEN": "of course I miss that place"},
     {"filename": "answer09fi.wav", "text": "kaipaan aina tänne", "subtitleEN": "I always miss this place"},
-    {"filename": "answer10fi.wav", "text": "monipaikkaisuus", "subtitleEN": "multiple homes..."},
     {"filename": "answer11fi.wav", "text": "kaipaan sitä minun metsää", "subtitleEN": "I miss that forest of mine"},
     {"filename": "answer12fi.wav", "text": "melankolia", "subtitleEN": "melancholia"},
     {"filename": "answer13fi.wav", "text": "melankolia, kaivata paikkaan jossa ei voi olla", "subtitleEN": "melancholia, to miss a place where I cannot be"},
@@ -151,11 +150,9 @@
     {"filename": "answer97fi.wav", "text": "kenties olenkin rihmasto", "subtitleEN": "perhaps I am a rhizome"},
     {"filename": "answer98fi.wav", "text": "juurtuminen", "subtitleEN": "rooting"},
     {"filename": "answer99fi.wav", "text": "ihminen, rihmasto", "subtitleEN": "a human being, a rhizome"},
-    {"filename": "answer100fi.wav", "text": "monipaikkaisuus", "subtitleEN": "multiple homes"},
     {"filename": "answer101fi.wav", "text": "aurinko", "subtitleEN": "the sun"},
     {"filename": "answer102fi.wav", "text": "aurinko lämmittää minun selkää", "subtitleEN": "the sun warms my back"},
     {"filename": "answer103fi.wav", "text": "taisin juurtua, tänne", "subtitleEN": "I think I may have rooted myself... here"},
-    {"filename": "answer104fi.wav", "text": "tuo joki on valtavan kaunis", "subtitleEN": "that river is incredibly beautiful"},
     {"filename": "answer105fi.wav", "text": "tunnen kuuluvani tänne", "subtitleEN": "I feel like I belong here"},
     {"filename": "answer106fi.wav", "text": "pystyn puhumaan ihmisten kanssa", "subtitleEN": "I am able to speak to the people here"},
     {"filename": "answer107fi.wav", "text": "olen osa tätä kaikkea", "subtitleEN": "I am part of all of this"}
@@ -183,7 +180,6 @@
     {"filename": "interjection20fi.wav", "text": "mutta", "subtitleEN": "but"},
     {"filename": "interjection21fi.wav", "text": "tt.. aivan!", "subtitleEN": "oh yes!"},
     {"filename": "interjection22fi.wav", "text": "tai jospa kuitenkin...", "subtitleEN": "or perhaps..."},
-    {"filename": "interjection23fi.wav", "text": "lähdin", "subtitleEN": "I left"},
     {"filename": "interjection24fi.wav", "text": "nyt en kyllä oo ihan varma", "subtitleEN": "...now I am not quite sure"},
     {"filename": "interjection25fi.wav", "text": "ootas mä mietin", "subtitleEN": "let me think"},
     {"filename": "interjection26fi.wav", "text": "ootas mä mietin hetken", "subtitleEN": "let me think for a moment"},
@@ -195,7 +191,18 @@
     {"filename": "interjection32fi.wav", "text": "niin, totta", "subtitleEN": "yes, its true"},
     {"filename": "interjection33fi.wav", "text": "mutta jospa", "subtitleEN": "but what if:"},
     {"filename": "interjection34fi.wav", "text": "tai ehkä ei kuitenkaan", "subtitleEN": "or perhaps not"},
-    {"filename": "interjection35fi.wav", "text": "miksiköhän", "subtitleEN": "I wonder why"}
+    {"filename": "interjection35fi.wav", "text": "miksiköhän", "subtitleEN": "I wonder why"},
+		{"filename": "interjection36fi.wav", "text": "hyttysen ininää", "subtitleEN": "[mosquito]"},
+		{"filename": "interjection36fi.wav", "text": "hyttysen ininää", "subtitleEN": "[mosquito]"},
+		{"filename": "interjection36fi.wav", "text": "hyttysen ininää", "subtitleEN": "[mosquito]"},
+		{"filename": "interjection36fi.wav", "text": "hyttysen ininää", "subtitleEN": "[mosquito]"},
+		{"filename": "interjection37fi.wav", "text": "meren pauhu", "subtitleEN": "[ocean]"},
+		{"filename": "interjection37fi.wav", "text": "meren pauhu", "subtitleEN": "[ocean]"},
+		{"filename": "interjection37fi.wav", "text": "meren pauhu", "subtitleEN": "[ocean]"},
+		{"filename": "interjection37fi.wav", "text": "meren pauhu", "subtitleEN": "[ocean]"},
+		{"filename": "interjection38fi.wav", "text": "tuuli", "subtitleEN": "[wind]"},
+		{"filename": "interjection38fi.wav", "text": "tuuli", "subtitleEN": "[wind]"},
+		{"filename": "interjection39fi.wav", "text": "kaipaan", "subtitleEN": "[I miss]"}
   ],
   "words": [
   ]
