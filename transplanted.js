@@ -1,9 +1,9 @@
 let poem =
 `From that landscape I am now missing.`
 
-let cnv, lines, markov, txt1, txt2, x = 40, y = 40;
+var cnv, lines, markov, txt1, txt2, x = 40, y = 40;
 let transplanted, rooted, growing, rhizome;
-let poetryLoop, toggleAudio, audioStatus;
+var poetryLoop, toggleAudio, audioStatus, samplePlaying;
 
 let myFont, fontDone;
 
@@ -15,9 +15,6 @@ function preload(){
 
   soundFormats(`mp3`);
   poetryLoop = loadSound(`assets/sound/transplanted.mp3`);
-
-  //poetryLoop = createAudio('assets/sound/transplanted.mp3');
-  //poetryLoop.autoplay();
   poetryLoop.setVolume(0.1);
 
   myFont = loadFont("assets/fonts/PoppinsLatin-Medium.otf", fontLoaded);
@@ -36,9 +33,11 @@ function preload(){
 function setup(){
 
   if(poetryLoop.isLoaded()){
-    poetryLoop.play();
-    poetryLoop.setLoop(true);
-    poetryLoop.pause();
+
+    //poetryLoop.setLoop(true);
+      //poetryLoop.play();
+    //poetryLoop.pause();
+    samplePlaying = false;
   }
 
   cnv = createCanvas(500, 200);
@@ -87,15 +86,20 @@ function setup(){
 
 function muteUnmute(){
 
-  console.log("entered function and poetryLoop.paused is: " + poetryLoop.isPaused());
+  console.log("entered function and poetryLoop.isPlaying() is: " + poetryLoop.isPlaying() );
 
-  if ( poetryLoop.isPlaying() ) {
+
+  if ( samplePlaying ) {
     poetryLoop.pause();
+    samplePlaying = false;
     toggleAudio.html(`&#128264`); // audio on
 
-  } else {
-    poetryLoop.play();
+  } else if ( !samplePlaying ){
+    poetryLoop.loop();
+    samplePlaying = true;
     toggleAudio.html(`&#128263`); // audio off
+  } else {
+    console.log("something is wrong.");
   }
 
 }
@@ -103,11 +107,11 @@ function muteUnmute(){
 function drawText() {
   background(20);
   fill(23, 230, 200);
-  text(lines.join(' '), x, y, 420, 420);
+  text( lines , x, y, 420, 420 );
 }
 
 function mouseClicked() {
-  lines = markov.generate(1);
+  lines = markov.generate(2);
   x = y = 40;
   drawText();
 }
